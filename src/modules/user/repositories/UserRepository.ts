@@ -36,7 +36,8 @@ class UserRepository implements IUserRepository {
     };
   }
 
-  async save() {
+  async save(): Promise<void> {
+    console.log(this.user);
     const user = new User(this.user);
     await user.save();
   }
@@ -54,7 +55,6 @@ class UserRepository implements IUserRepository {
       email: user?.email,
       password: user?.password,
     } as UserDTO;
-    console.log(this.user);
 
     return "User found";
   }
