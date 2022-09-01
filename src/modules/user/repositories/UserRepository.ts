@@ -41,8 +41,22 @@ class UserRepository implements IUserRepository {
     await user.save();
   }
 
-  async findUser(email: string): Promise<void> {
-    // Buscar no banco de dados
+  async findUser(email: string): Promise<string> {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return "User not found";
+    }
+
+    this.user = {
+      id: user?.id,
+      name: user?.name,
+      email: user?.email,
+      password: user?.password,
+    } as UserDTO;
+    console.log(this.user);
+
+    return "User found";
   }
 }
 
