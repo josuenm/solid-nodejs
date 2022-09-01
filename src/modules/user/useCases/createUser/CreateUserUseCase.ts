@@ -13,6 +13,8 @@ class CreateUserUseCase {
 
     this.userRepository.create({ name, email, password });
     this.userRepository.save();
+
+    return;
   }
 }
 
