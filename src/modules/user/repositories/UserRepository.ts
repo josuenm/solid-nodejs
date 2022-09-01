@@ -19,6 +19,14 @@ class UserRepository implements IUserRepository {
     return UserRepository.INSTANCE;
   }
 
+  login(password: string): boolean {
+    if (this.user?.password === password) {
+      return true;
+    }
+
+    return false;
+  }
+
   async create({ name, email, password }: Omit<UserDTO, "id">): Promise<void> {
     this.user = {
       id: uuidv4(),
@@ -29,8 +37,6 @@ class UserRepository implements IUserRepository {
   }
 
   async save() {
-    if (!this.user) {
-    }
     const user = new User(this.user);
     await user.save();
   }
