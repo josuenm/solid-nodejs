@@ -9,10 +9,12 @@ class CreateUserController {
 
     try {
       this.createUserUseCase.execute({ name, email, password });
-
       response.status(201).send();
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.message === "User already exists") {
+        response.status(409).json({ error: error.message });
+      }
+      response.status(500).json({ error: "Error server" });
     }
   }
 }
