@@ -11,10 +11,16 @@ class CreateUserController {
       await this.createUserUseCase.execute({ name, email, password });
       response.status(201).send();
     } catch (error: any) {
-      if (error.message === "User already exists") {
-        response.status(401).json({ error: error.message });
+      switch (error.message) {
+        case "User already exists":
+          console.log(error.message);
+          response.status(401).json({ error: error.message });
+          break;
+
+        default:
+          response.status(500).json({ error: "Error server" });
+          break;
       }
-      response.status(500).json({ error: "Error server" });
     }
   }
 }
