@@ -37,7 +37,6 @@ class UserRepository implements IUserRepository {
   }
 
   async save(): Promise<void> {
-    console.log(this.user);
     const user = new User(this.user);
     await user.save();
   }
