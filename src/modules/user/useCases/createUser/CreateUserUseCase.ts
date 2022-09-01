@@ -7,7 +7,7 @@ class CreateUserUseCase {
   async execute({ name, email, password }: Omit<UserDTO, "id">): Promise<void> {
     const userAldreadyExists = await this.userRepository.findUser(email);
 
-    if (!!userAldreadyExists) {
+    if (userAldreadyExists === "User found") {
       throw new Error("User already exists");
     }
 
