@@ -1,5 +1,6 @@
 import express from "express";
-import { connectToDatabase } from "./databases/mongo";
+import { connectToMongoDB } from "./databases/mongo";
+import "./databases/postgres";
 import { router as Routes } from "./routes";
 
 const port = 8080;
@@ -8,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 
-connectToDatabase();
+connectToMongoDB();
 
 app.use("/api", Routes);
 
