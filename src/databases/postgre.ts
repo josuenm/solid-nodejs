@@ -8,6 +8,13 @@ const client = new Client({
   database: "Users",
 });
 
+async function connectToPostgreSQL() {
+  await client
+    .connect()
+    .then(() => console.log("Connected to PostgreSQL"))
+    .catch(() => console.log("Error trying to connect to PostgreSQL"));
+}
+
 // Examples created by me to use PostgreSQL using pg package
 
 function getAll() {
@@ -59,4 +66,4 @@ function deleteUser(id: string) {
     .finally(() => client.end());
 }
 
-deleteUser("38b57260-f1a8-4a90-ba40-c44f82b9cc8a");
+export { client, connectToPostgreSQL };
