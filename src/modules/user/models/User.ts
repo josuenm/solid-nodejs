@@ -1,27 +1,21 @@
-import { model, Schema } from "mongoose";
+import { v4 as uuidV4 } from "uuid";
+import { UserDTO } from "../types/User";
 
-const UserSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+class User {
+  public id?: string;
+  public name: string;
+  public email: string;
+  public password: string;
 
-  name: {
-    type: String,
-    required: true,
-  },
+  constructor({ name, email, password }: UserDTO) {
+    this.name = name;
+    this.email = email;
+    this.password = password;
 
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+    if (!this.id) {
+      this.id = uuidV4();
+    }
+  }
+}
 
-  password: {
-    type: String,
-    required: true,
-  },
-});
-
-export default model("User", UserSchema);
+export default User;
