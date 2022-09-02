@@ -13,7 +13,6 @@ class CreateUserController {
     } catch (error: any) {
       switch (error.message) {
         case "User already exists":
-          console.log(error.message);
           response.status(401).json({ error: error.message });
           break;
 
